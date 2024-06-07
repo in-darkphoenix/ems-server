@@ -1,17 +1,24 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import { Express } from "express-serve-static-core";
 
 import accountRoutes from "./routes/account.routes";
+import categoryRoutes from "./routes/category.routes";
 import { datasource } from "./database/data-source";
+import { appInfo } from "./configs/app.config";
+import { dbConnectParameter } from "./configs/db.config";
 
 const app: Express = express();
 
-const PORT = 4500;
-const DB = "ems_db";
+const PORT = appInfo.port;
+const DB = dbConnectParameter.db;
 
 app.use(express.json());
 
 app.use("/api/accounts", accountRoutes);
+app.use("/api/categories", categoryRoutes);
 
 datasource
   .initialize()
@@ -19,11 +26,11 @@ datasource
     console.log(
       `[database]: Connection with ${DB} has been established successfully!!`
     );
-
-    app.listen(PORT, () => {
-      console.log(`[server]: server listening to http://localhost:${PORT}/`);
-    });
   })
   .catch((err: Error) => {
     console.error("Error during Data Source initialization:", err);
   });
+
+app.listen(PORT, () => {
+  console.log(`[server]: server listening to http://localhost:${PORT}/`);
+});

@@ -6,15 +6,15 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity()
+@Entity("accounts")
 export class Account {
-  @PrimaryGeneratedColumn()
-  account_id!: number;
+  @PrimaryGeneratedColumn("uuid")
+  account_id!: string;
 
-  @Column()
+  @Column({ length: 50 })
   account_name!: string;
 
-  @Column()
+  @Column({ nullable: true,length:500 })
   description!: string;
 
   @CreateDateColumn({
