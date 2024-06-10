@@ -7,7 +7,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { TransactionType } from "./transaction_type.entity";
 import { Account } from "./account.entity";
 import { Category } from "./category.entity";
 import { User } from "./user.entity";
@@ -46,13 +45,6 @@ export class Transaction {
     onUpdate: "CURRENT_TIMESTAMP(6)",
   })
   updated_at!: Date;
-
-  @ManyToOne(
-    () => TransactionType,
-    (transactionType) => transactionType.transaction_type_id
-  )
-  @JoinColumn({ name: "transaction_type_id" })
-  transactionType!: TransactionType;
 
   @ManyToOne(() => Account, (account) => account.account_id)
   @JoinColumn({ name: "account_id" })

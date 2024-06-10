@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import { Express } from "express-serve-static-core";
+import cors from "cors";
 
 import accountRoutes from "./routes/account.routes";
 import categoryRoutes from "./routes/category.routes";
@@ -14,6 +15,13 @@ const app: Express = express();
 
 const PORT = appInfo.port;
 const DB = dbConnectParameter.db;
+const allowedOrigins = ["http://localhost:4200"];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
+// Then pass these options to cors:
+app.use(cors(options));
 
 app.use(express.json());
 

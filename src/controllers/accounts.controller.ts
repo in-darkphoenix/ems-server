@@ -7,7 +7,7 @@ const getAccounts = async (req: Request, res: Response) => {
   try {
     const accounts = await ds.getRepository(Account).find();
 
-    res.status(200).json({ message: "account add success", data: accounts });
+    res.status(200).json({ message: "all accounts fetch success", data: accounts });
   } catch (err) {
     res.status(500).json({ message: "something went wrong", error: err });
   }
@@ -20,7 +20,7 @@ const getAccountById = async (req: Request, res: Response) => {
       .getRepository(Account)
       .findOneBy({ account_id: accountId });
 
-    res.status(200).json({ message: "account add success", data: accounts });
+    res.status(200).json({ message: "account details fetch success", data: accounts });
   } catch (err) {
     res.status(500).json({ message: "something went wrong", error: err });
   }
