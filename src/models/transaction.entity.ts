@@ -46,15 +46,24 @@ export class Transaction {
   })
   updated_at!: Date;
 
-  @ManyToOne(() => Account, (account) => account.account_id)
+  @ManyToOne(() => Account, (account) => account.account_id, {
+    onDelete: "CASCADE",
+    nullable: false,
+  })
   @JoinColumn({ name: "account_id" })
   account!: Account;
 
-  @ManyToOne(() => Category, (category) => category.category_id)
+  @ManyToOne(() => Category, (category) => category.category_id, {
+    onDelete: "CASCADE",
+    nullable: false,
+  })
   @JoinColumn({ name: "category_id" })
   category!: Category;
 
-  @ManyToOne(() => User, (user) => user.user_id)
+  @ManyToOne(() => User, (user) => user.user_id, {
+    onDelete: "CASCADE",
+    nullable: false,
+  })
   @JoinColumn({ name: "user_id" })
   user!: User;
 }
