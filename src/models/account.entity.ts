@@ -18,13 +18,13 @@ export class Account {
   description!: string;
 
   @CreateDateColumn({
-    type: "timestamp",
+    type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
   })
   created_at!: Date;
 
   @UpdateDateColumn({
-    type: "timestamp",
+    type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
     onUpdate: "CURRENT_TIMESTAMP(6)",
   })

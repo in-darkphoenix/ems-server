@@ -20,6 +20,9 @@ export class Transaction {
   @Column({ length: 50 })
   title!: string;
 
+  @Column({ type: "numeric", precision: 10, scale: 2 })
+  amount!: number;
+
   @Column({ nullable: true, length: 300 })
   description!: string;
 
@@ -34,13 +37,13 @@ export class Transaction {
   transaction_offset!: TransactionOffset;
 
   @CreateDateColumn({
-    type: "timestamp",
+    type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
   })
   created_at!: Date;
 
   @UpdateDateColumn({
-    type: "timestamp",
+    type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
     onUpdate: "CURRENT_TIMESTAMP(6)",
   })

@@ -26,7 +26,7 @@ export class MonthlySummary {
   closing_balance!: number;
 
   @CreateDateColumn({
-    type: "timestamp",
+    type: "timestamptz",
     default: () => "CURRENT_TIMESTAMP(6)",
   })
   created_at!: Date;
