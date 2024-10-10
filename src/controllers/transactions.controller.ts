@@ -67,7 +67,15 @@ const addTransaction = async (req: Request, res: Response) => {
 const editTransaction = async (req: Request, res: Response) => {
   try {
     const transactionId: string = req.params.id;
-    const transactionUpdatedBody: CreateTransaction = req.body;
+    const requestBody = req.body;
+    const transactionUpdatedBody = {
+      title: requestBody.title,
+      description: requestBody.description,
+      transaction_offset: requestBody.transaction_type,
+      created_at: requestBody.transaction_date,
+      account: requestBody.account,
+      category: requestBody.category,
+    };
 
     await ds
       .getRepository(Transaction)
