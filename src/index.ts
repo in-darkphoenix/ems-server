@@ -8,6 +8,8 @@ import cors from "cors";
 import accountRoutes from "./routes/account.routes";
 import categoryRoutes from "./routes/category.routes";
 import transactionRoutes from "./routes/transaction.routes";
+import passwordRoutes from "./routes/password.routes";
+import summaryRoutes from "./routes/summary.routes";
 import { datasource } from "./database/data-source";
 import { appInfo } from "./configs/app.config";
 import { dbConnectParameter } from "./configs/db.config";
@@ -29,6 +31,8 @@ app.use(express.json());
 app.use("/api/accounts", accountRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/passwords", passwordRoutes);
+app.use("/api/summaries", summaryRoutes);
 
 datasource
   .initialize()
