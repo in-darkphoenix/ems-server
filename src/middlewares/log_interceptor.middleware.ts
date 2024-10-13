@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
-import { formatHTTPLoggerResponse, logger } from "../services/logger.service";
+import { apiLogger } from "../services/logger.service";
+import { formatHTTPLoggerResponse } from "../utils/formatter.utils";
 
 const responseInterceptor = (
   req: Request,
@@ -16,12 +17,12 @@ const responseInterceptor = (
   res.send = function (body: any): Response {
     if (!responseSent) {
       if (res.statusCode < 400) {
-        logger.info(
-          "Some Success message",
+        apiLogger.info(
+          body.message,
           formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
       } else {
-        logger.error(
+        apiLogger.error(
           body.message,
           formatHTTPLoggerResponse(req, res, body, requestStartTime)
         );
