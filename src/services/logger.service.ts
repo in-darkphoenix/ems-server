@@ -20,7 +20,7 @@ const apiLogger = winston.createLogger({
     })
   ),
   transports: [
-    new winston.transports.Console(),
+    // new winston.transports.Console(),
     new DailyRotateFile({
       filename: "logs/api-logs-%DATE%.log",
       datePattern: "MMMM-DD-YYYY",

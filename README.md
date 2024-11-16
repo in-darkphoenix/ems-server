@@ -25,3 +25,7 @@ const transactions = await ds.getRepository(Transaction).find({
     order: { created_at: "DESC" },
 });
 ```
+
+# generate public private RSA keys
+private key: ```openssl genrsa -out yourdomain.key [size]```
+public key: ```openssl rsa -in yourdomain.key -pubout -out yourdomain_public.key```

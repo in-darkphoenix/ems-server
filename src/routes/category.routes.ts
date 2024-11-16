@@ -6,8 +6,14 @@ import {
   getCategories,
   getCategoryById,
 } from "../controllers/categories.controller";
+import {
+  checkIfAuthenticated,
+  handleAuthError,
+} from "../middlewares/auth.middleware";
 
 const router: Router = Router();
+
+router.use(checkIfAuthenticated, handleAuthError);
 
 router.get("/", getCategories);
 router.get("/:id", getCategoryById);

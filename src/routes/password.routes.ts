@@ -6,8 +6,14 @@ import {
   editPassword,
   deletePassword,
 } from "../controllers/passwords.controller";
+import {
+  checkIfAuthenticated,
+  handleAuthError,
+} from "../middlewares/auth.middleware";
 
 const router: Router = Router();
+
+router.use(checkIfAuthenticated, handleAuthError);
 
 router.get("/", getPasswords);
 router.get("/:id", getPasswordById);

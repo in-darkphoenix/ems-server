@@ -10,6 +10,7 @@ import categoryRoutes from "./routes/category.routes";
 import transactionRoutes from "./routes/transaction.routes";
 import passwordRoutes from "./routes/password.routes";
 import summaryRoutes from "./routes/summary.routes";
+import authRoutes from "./routes/auth.routes";
 import { datasource } from "./database/data-source";
 import { appInfo } from "./configs/app.config";
 import { dbConnectParameter } from "./configs/db.config";
@@ -33,6 +34,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/passwords", passwordRoutes);
 app.use("/api/summaries", summaryRoutes);
+app.use("/api/auths", authRoutes);
 
 datasource
   .initialize()

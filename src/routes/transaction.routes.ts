@@ -5,8 +5,14 @@ import {
   editTransaction,
   getTransactions,
 } from "../controllers/transactions.controller";
+import {
+  checkIfAuthenticated,
+  handleAuthError,
+} from "../middlewares/auth.middleware";
 
 const router: Router = Router();
+
+router.use(checkIfAuthenticated, handleAuthError);
 
 router.get("/", getTransactions);
 router.post("/", addTransaction);

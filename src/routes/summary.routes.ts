@@ -1,7 +1,13 @@
 import { Router } from "express";
 import { generatePDFHandler } from "../controllers/summary.controller";
-
-const router: Router = Router();
+import {
+    checkIfAuthenticated,
+    handleAuthError,
+  } from "../middlewares/auth.middleware";
+  
+  const router: Router = Router();
+  
+  router.use(checkIfAuthenticated, handleAuthError);
 
 router.get("/getpdf", generatePDFHandler);
 
