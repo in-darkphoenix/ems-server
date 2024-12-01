@@ -14,7 +14,9 @@ const loginHandler = async (req: Request, res: Response) => {
     const validationResult = await validateUserCrendentials(username, password);
     if (!validationResult?.success) {
       statusCode = 401;
-      res.status(statusCode).json({ message: validationResult?.message });
+      return res
+        .status(statusCode)
+        .json({ message: validationResult?.message });
     }
 
     const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
@@ -28,7 +30,7 @@ const loginHandler = async (req: Request, res: Response) => {
     res.status(statusCode).json({
       message: validationResult?.message,
       id_token: jwtBearerToken,
-      expires_in: "30m",
+      expires_in: "30",
     });
   } catch (err) {
     console.log(err);
