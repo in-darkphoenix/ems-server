@@ -5,7 +5,8 @@ const dbConnectParameter: IDBConnect = {
   port: Number(process.env.DB_PORT),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  db: process.env.DB_NAME,
+  db:
+    process.env.ENV === "PROD" ? process.env.PROD_DB_NAME : process.env.DB_NAME,
   logging: process.env.DB_LOGGING === "true" ? true : false,
   sync: process.env.DB_SYNC === "true" ? true : false,
 };

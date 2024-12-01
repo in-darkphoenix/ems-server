@@ -10,7 +10,7 @@ const validateUserCrendentials = async (username: string, password: string) => {
       result.message = "no user found with username " + username;
     } else {
       if (password !== userDetails.password) {
-        result.message = "username or password invalid";
+        result.message = "invalid credentials";
       } else {
         result.success = true;
         result.payload = userDetails;
