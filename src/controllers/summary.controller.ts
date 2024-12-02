@@ -18,6 +18,7 @@ const generatePDFHandler = async (req: Request, res: Response) => {
       .addSelect(["c.category_name"])
       .where("extract(month from t.created_at) = :month", { month })
       .andWhere("extract(year from t.created_at) = :year", { year })
+      // .andWhere("extract(day from t.created_at) = :date", { date })
       .orderBy("t.created_at", "DESC")
       .getMany();
 

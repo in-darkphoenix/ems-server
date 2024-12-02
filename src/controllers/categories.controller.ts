@@ -5,7 +5,9 @@ import { CreateCategory } from "../dtos/categories.dto";
 
 const getCategories = async (req: Request, res: Response) => {
   try {
-    const categories = await ds.getRepository(Category).find();
+    const categories = await ds
+      .getRepository(Category)
+      .find({ order: { category_name: "ASC" } });
 
     res
       .status(200)
