@@ -75,6 +75,7 @@ const editTransaction = async (req: Request, res: Response) => {
       created_at: requestBody.transaction_date,
       account: requestBody.account,
       category: requestBody.category,
+      amount: requestBody.amount,
     };
 
     await ds
