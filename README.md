@@ -9,6 +9,7 @@ development start: npm run start:dev
 ```
 
 # type orm find usage
+## abstract function
 ```
 const transactions = await ds.getRepository(Transaction).find({
     select: {
@@ -24,6 +25,29 @@ const transactions = await ds.getRepository(Transaction).find({
     },
     order: { created_at: "DESC" },
 });
+```
+## query builder
+```
+const transactions = await ds
+    .getRepository(Transaction)
+    .createQueryBuilder("t")
+    .select([
+    "t.transaction_id",
+    "t.title",
+    "t.amount",
+    "t.description",
+    "t.transaction_offset",
+    "t.created_at",
+    ])
+    .leftJoin("t.account", "a")
+    .addSelect(["a.account_id", "a.account_name"])
+    .leftJoin("t.category", "c")
+    .addSelect(["c.category_id", "c.category_name"])
+    .where("extract(month from t.created_at) = :month", { month })
+    .andWhere("extract(year from t.created_at) = :year", { year })
+    .andWhere("extract(day from t.created_at) = :day", { day })
+    .orderBy("t.created_at", "DESC")
+    .getMany();
 ```
 
 # generate public private RSA keys
