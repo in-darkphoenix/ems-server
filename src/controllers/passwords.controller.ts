@@ -3,7 +3,7 @@ import CryptoJS from "crypto-js";
 const { AES } = CryptoJS;
 import { datasource as ds } from "../database/data-source";
 import { Password } from "../models/password.entity";
-import { CreatePassword } from "../dtos/passwords.dto";
+import { ICreatePassword } from "../dtos/passwords.dto";
 
 const getPasswords = async (req: Request, res: Response) => {
   try {
@@ -12,6 +12,7 @@ const getPasswords = async (req: Request, res: Response) => {
       .createQueryBuilder("p")
       .select([
         "p.password_id",
+        "p.account_title",
         "p.account_name",
         "p.account_url",
         "p.hashed_password",
@@ -20,7 +21,7 @@ const getPasswords = async (req: Request, res: Response) => {
         "p.created_at",
         "p.updated_at",
       ])
-      .orderBy("p.account_name")
+      .orderBy("p.account_title")
       .getMany();
 
     res
@@ -60,7 +61,7 @@ const getPasswordById = async (req: Request, res: Response) => {
 
 const addPassword = async (req: Request, res: Response) => {
   try {
-    const passwordRequestBody: CreatePassword = req.body;
+    const passwordRequestBody: ICreatePassword = req.body;
 
     const originalPassword: string = passwordRequestBody.original_password;
     const hashedPassword: string = AES.encrypt(
@@ -84,7 +85,7 @@ const addPassword = async (req: Request, res: Response) => {
 const editPassword = async (req: Request, res: Response) => {
   try {
     const passwordId: string = req.params.id;
-    const passwordUpdatedBody: CreatePassword = req.body;
+    const passwordUpdatedBody: ICreatePassword = req.body;
 
     const originalPassword: string = passwordUpdatedBody.original_password;
     const hashedPassword: string = AES.encrypt(

@@ -12,6 +12,9 @@ export class Password {
   password_id!: string;
 
   @Column({ length: 100 })
+  account_title!: string;
+
+  @Column({ length: 100 })
   account_name!: string;
 
   @Column({ nullable: true, type: "text" })

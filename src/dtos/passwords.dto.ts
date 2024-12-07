@@ -1,4 +1,5 @@
-export interface CreatePassword {
+export interface ICreatePassword {
+  account_title: string;
   account_name: string;
   account_url?: URL;
   original_password: string;
